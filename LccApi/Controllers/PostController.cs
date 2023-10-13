@@ -18,17 +18,15 @@ namespace LccApi.Controllers
             _context = context;
         }
 
-        
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PostModel>>> GetPosts()
+        public async Task<IActionResult> GetPosts()
         {
             var posts = await _context.Posts.ToListAsync();
             return Ok(posts);
         }
 
-        
         [HttpGet("{id}")]
-        public async Task<ActionResult<PostModel>> GetPost(int id)
+        public async Task<IActionResult> GetPost(int id)
         {
             var post = await _context.Posts.FindAsync(id);
 
@@ -40,9 +38,8 @@ namespace LccApi.Controllers
             return Ok(post);
         }
 
-        // POST: api/Post
         [HttpPost]
-        public async Task<ActionResult<PostModel>> CreatePost(PostModel post)
+        public async Task<IActionResult> CreatePost(PostModel post)
         {
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();
@@ -50,7 +47,6 @@ namespace LccApi.Controllers
             return CreatedAtAction("GetPost", new { id = post.Id }, post);
         }
 
-        
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePost(int id, PostModel post)
         {
@@ -77,7 +73,6 @@ namespace LccApi.Controllers
             return NoContent();
         }
 
-        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePost(int id)
         {
