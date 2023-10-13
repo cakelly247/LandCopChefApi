@@ -3,13 +3,19 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using LccApi.Models;
 
-namespace LccApi.Data
-{
-    public class ApplicationDbContext : IdentityDbContext<UserModel, IdentityRole<int>, int>
-    {
-        public DbSet<PostModel> Posts { get; set; } 
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+
+namespace LccApi.Data;
+
+public class LccDbContext : IdentityDbContext<UserModel, IdentityRole<int>, int>
+{
+    public LccDbContext(DbContextOptions<LccDbContext> options) : base(options) {}
+
+    public DbSet<ReplyEntity> Replies { get; set; }
+
+    public DbSet<PostModel> Posts { get; set; } 
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -18,4 +24,4 @@ namespace LccApi.Data
             modelBuilder.Entity<UserModel>().ToTable("Users");
         }
     }
-}
+

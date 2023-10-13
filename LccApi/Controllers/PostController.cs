@@ -11,9 +11,9 @@ namespace LccApi.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly LccDbContext _context;
 
-        public PostController(ApplicationDbContext context)
+        public PostController(LccDbContext context)
         {
             _context = context;
         }
