@@ -16,17 +16,16 @@ public class CommentController : ControllerBase
     {
         _context = context;
     }
-
-    [HttpPost]
-public async Task<ActionResult<CommentModel>> CreateComment(CommentModel comment)
+[HttpPost]
+public async Task<IActionResult> CreateComment(CommentModel comment)
 {
     _context.Comments.Add(comment);
     await _context.SaveChangesAsync();
     return CreatedAtAction("GetComment", new { id = comment.Id }, comment);
 }
 
-   [HttpGet("byauthor/{authorId}")]
-public async Task<ActionResult<IEnumerable<CommentModel>>> GetCommentsByAuthorId(int authorId)
+[HttpGet("byauthor/{authorId}")]
+public async Task<IActionResult> GetCommentsByAuthorId(int authorId)
 {
     var comments = await _context.Comments
         .Where(c => c.AuthorId == authorId)
