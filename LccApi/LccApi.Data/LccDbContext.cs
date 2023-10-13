@@ -1,4 +1,3 @@
-using static LccApi.Models.UserModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -6,9 +5,11 @@ using LccApi.Models;
 
 namespace LccApi.Data;
 
-public class ApplicationDbContext : IdentityDbContext<UserModel, IdentityRole<int>, int>
-    {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {}
+public class LccDbContext : IdentityDbContext<UserModel, IdentityRole<int>, int>
+{
+    public LccDbContext(DbContextOptions<LccDbContext> options) : base(options) {}
+
+    public DbSet<ReplyEntity> Replies { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

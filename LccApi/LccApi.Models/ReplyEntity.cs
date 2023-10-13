@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LccApi.Models;
 
-public class ReplyModel
+public class ReplyEntity
 {
     [Key]
     public int Id { get; set; }
